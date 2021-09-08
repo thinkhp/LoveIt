@@ -125,6 +125,8 @@
     {{- dict "Source" "lib/mermaid/mermaid.scss" "ToCSS" $options "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
 {{- end -}}
 
+<script src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js"></script>
+
 {{- /* ECharts */ -}}
 {{- if (.Scratch.Get "this").echarts -}}
     {{- $source := $cdn.echartsJS | default "lib/echarts/echarts.min.js" -}}
@@ -205,3 +207,5 @@
 {{- end -}}
 
 {{- partial "plugin/analytics.html" . -}}
+
+
