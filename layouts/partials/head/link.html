@@ -49,27 +49,3 @@
 {{- $source := $cdn.animateCSS | default "lib/animate/animate.min.css" -}}
 {{- $style := dict "Source" $source "Fingerprint" $fingerprint -}}
 {{- partial "plugin/style.html" $style -}}
-
-<style>
-    @font-face {
-        font-family: 'Merriweather';
-        font-style: normal;
-        font-weight: 400;
-        src: local('Merriweather'), local('Merriweather-Regular'),
-            url('/lib/webfonts/merriweather-v13-latin-regular.woff2') format('woff2'),
-            url('/lib/webfonts/merriweather-v13-latin-regular.woff') format('woff');
-    }
-
-    @font-face {
-        font-family: 'Lato';
-        font-style: normal;
-        font-weight: 400;
-        src: local('Lato Regular'), local('Lato-Regular'),
-            url('/lib/webfonts/lato-v11-latin-regular.woff2') format('woff2'),
-            url('/lib/webfonts/lato-v11-latin-regular.woff') format('woff');
-    }
-
-    .body {
-        font-family: Merriweather, system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
-    }
-</style>
