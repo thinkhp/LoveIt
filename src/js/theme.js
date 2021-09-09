@@ -471,15 +471,56 @@ class Theme {
     }
 
     initMermaid() {
-        const $mermaidElements = document.getElementsByClassName('mermaid');
-        if ($mermaidElements.length) {
-            mermaid.initialize({startOnLoad: false, theme: 'null'});
-            this.util.forEach($mermaidElements, $mermaid => {
-                mermaid.mermaidAPI.render('svg-' + $mermaid.id, this.data[$mermaid.id], svgCode => {
-                    $mermaid.insertAdjacentHTML('afterbegin', svgCode);
-                }, $mermaid);
-            });
-        }
+        // 使用 ``` 输出 mermaid
+        // 1. 当markdown 解析配置 guessSyntax 为 true 
+        // Replace mermaid pre.code to div
+        // language-fallback
+        const mermaidKeywords = [
+            "graph TD",
+            "graph TB",
+            "graph BT",
+            "graph RL",
+            "graph LR",
+            "sequenceDiagram",
+            "gantt",
+            "classDiagram",
+            "gitGraph",
+            "erDiagram",
+            "journey",
+        ];
+        Array.from(
+            document.getElementsByClassName("language-fallback")
+        ).forEach((ele) => {
+            var graphDefinition = ele.innerText;
+            if (
+                mermaidKeywords.some((keyword) =>
+                    graphDefinition.startsWith(keyword)
+                )
+            ) {
+                eleN =
+                    ele.parentElement.parentElement.parentElement.parentElement;
+                eleN.parentElement.outerHTML = `<div class="mermaid">${ele.innerText}</div>`;
+            }
+        });
+
+        // 1. 当markdown 解析配置 guessSyntax 为 false
+        // language-mermaid
+        Array.from(document.getElementsByClassName("language-mermaid")).forEach(
+            (ele) => {
+                ele.parentElement.outerHTML = `<div class="mermaid">${ele.innerText}</div>`;
+            }
+        );
+
+        // 使用 shortcode 输出 mermaid
+        // const $mermaidElements = document.getElementsByClassName('mermaid');
+        // if ($mermaidElements.length) {
+        //     mermaid.initialize({startOnLoad: false, theme: 'null'});
+        //     this.util.forEach($mermaidElements, $mermaid => {
+        //         mermaid.mermaidAPI.render('svg-' + $mermaid.id, this.data[$mermaid.id], svgCode => {
+        //             $mermaid.insertAdjacentHTML('afterbegin', svgCode);
+        //         }, $mermaid);
+        //     });
+        // }
     }
 
     initEcharts() {

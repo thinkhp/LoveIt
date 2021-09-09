@@ -1,31 +1,6 @@
 {{- if ne .Site.Params.footer.enable false -}}
     <footer class="footer">
         <script>
-            // Replace mermaid pre.code to div
-            // language-fallback
-            const mermaidKeywords = [
-                "graph TD",
-                "graph TB",
-                "graph BT",
-                "graph RL",
-                "graph LR",
-                "sequenceDiagram",
-                "gantt",
-                "classDiagram",
-                "gitGraph",
-                "erDiagram",
-                "journey"
-            ];
-            Array.from(document.getElementsByClassName('language-fallback')).forEach(ele => {
-                var graphDefinition = ele.innerText;
-                if (mermaidKeywords.some((keyword) => graphDefinition.startsWith(keyword))) {
-                    eleN = ele.parentElement.parentElement.parentElement.parentElement
-                    eleN.parentElement.outerHTML = `<div class="mermaid">${ele.innerText}</div>`
-                }
-            })
-            Array.from(document.getElementsByClassName('language-mermaid')).forEach(ele => {
-                ele.parentElement.outerHTML = `<div class="mermaid">${ele.innerText}</div>`
-            })
         </script>
         <div class="footer-container">
             {{- /* Custom Content */ -}}
